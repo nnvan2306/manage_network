@@ -1,0 +1,274 @@
+/* Popup.css */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Popup Container */
+.popup-container {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    animation: slideIn 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Size Variants */
+.popup-small {
+    width: 100%;
+    max-width: 400px;
+}
+
+.popup-medium {
+    width: 100%;
+    max-width: 600px;
+}
+
+.popup-large {
+    width: 100%;
+    max-width: 900px;
+}
+
+.popup-fullscreen {
+    width: 95vw;
+    height: 95vh;
+    max-width: none;
+    max-height: none;
+}
+
+/* Header */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 24px 0 24px;
+    border-bottom: 1px solid #f1f5f9;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 16px 16px 0 0;
+    min-height: 80px;
+}
+
+.popup-title-section {
+    flex: 1;
+}
+
+.popup-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.popup-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.popup-close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.popup-close-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.popup-close-button:active {
+    transform: scale(0.95);
+}
+
+/* Content */
+.popup-content {
+    padding: 24px;
+    flex: 1;
+    overflow-y: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+.popup-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.popup-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .popup-overlay {
+        padding: 16px;
+    }
+
+    .popup-container {
+        border-radius: 12px;
+    }
+
+    .popup-header {
+        padding: 20px 20px 0 20px;
+        border-radius: 12px 12px 0 0;
+        min-height: 70px;
+    }
+
+    .popup-title {
+        font-size: 20px;
+    }
+
+    .popup-content {
+        padding: 20px;
+    }
+
+    .popup-close-button {
+        width: 36px;
+        height: 36px;
+    }
+
+    .popup-fullscreen {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .popup-fullscreen .popup-header {
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .popup-overlay {
+        padding: 12px;
+    }
+
+    .popup-small,
+    .popup-medium,
+    .popup-large {
+        max-width: none;
+        width: 100%;
+    }
+
+    .popup-header {
+        padding: 16px 16px 0 16px;
+        min-height: 60px;
+    }
+
+    .popup-title {
+        font-size: 18px;
+    }
+
+    .popup-content {
+        padding: 16px;
+    }
+
+    .popup-close-button {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Animation for closing */
+.popup-overlay.closing {
+    animation: fadeOut 0.2s ease-in;
+}
+
+.popup-overlay.closing .popup-container {
+    animation: slideOut 0.2s ease-in;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95) translateY(-10px);
+    }
+}
+
+/* Focus management */
+.popup-container:focus {
+    outline: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .popup-header {
+        background: #000000;
+        border-bottom: 2px solid #ffffff;
+    }
+
+    .popup-container {
+        border: 2px solid #000000;
+    }
+}
